@@ -15,6 +15,7 @@ use AltThree\Validator\ValidatingTrait;
 use CachetHQ\Cachet\Models\Traits\SearchableTrait;
 use CachetHQ\Cachet\Models\Traits\SortableTrait;
 use CachetHQ\Cachet\Presenters\ComponentPresenter;
+use CachetHQ\Cachet\Presenters\IncidentPresenter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -123,7 +124,8 @@ class Component extends Model implements HasPresenter
      */
     public function incidents()
     {
-        return $this->hasMany(Incident::class, 'component_id', 'id');
+        // return Incident::notScheduled()->where('visible', '>=', true)->where('component_id', '=', $this->component_id).get();
+        return $this->hasMany(Incident::class, 'component_id', 'id')->without('component_id');
     }
 
     /**

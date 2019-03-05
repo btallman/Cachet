@@ -51,16 +51,35 @@
                                 <option value='0' {{ $incident->visible === 0 ? 'selected' : null }}>{{ trans('forms.incidents.logged_in_only') }}</option>
                             </select>
                         </div>
-                        @if($incident->component)
-                        <div class="form-group" id='component-status'>
+
+                        
+                        @if(!$components_in_groups->isEmpty() || !$components_out_groups->isEmpty())
+                        <div class="form-group">
+                            <label>{{ trans('forms.incidents.component') }}<span class='help-block'>{{ trans('forms.optional') }}</span></label>
+                            <select name='component_id' class='form-control'>
+                                <option value='0'></option>
+                                @foreach($components_in_groups as $group)
+                                <optgroup label="{{ $group->name }}">
+                                    @foreach($group->components as $component)
+                                    <option {{ $incident->component && $incident->component_id == $component->id ? "selected" : "" }} value='{{ $component->id }}'>{{ $component->name }}</option>
+                                    @endforeach
+                                </optgroup>
+                                @endforeach
+                                @foreach($components_out_groups as $component)
+                                <option {{ $incident->component_id ? "selected" : "" }} value='{{ $component->id }}'>{{ $component->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        @endif
+                        
+                        <div class="form-group{{ $incident->component && $incident->component->status > 0 ? "" : " hidden" }}" id="component-status">
                             <div class="panel panel-default">
-                                <div class="panel-heading"><strong>{{ $incident->component->name }}</strong></div>
                                 <div class="panel-body">
                                     <div class="radio-items">
                                         @foreach(trans('cachet.components.status') as $statusID => $status)
                                         <div class="radio-inline">
                                             <label>
-                                                <input type="radio" name="component_status" value="{{ $statusID }}" {{ $incident->component->status == $statusID ? "checked='checked'" : "" }}>
+                                                <input type="radio" {{ $incident->component && $incident->component->status == $statusID ? "checked" : "" }} name="component_status" value="{{ $statusID }}">
                                                 {{ $status }}
                                             </label>
                                         </div>
@@ -69,7 +88,8 @@
                                 </div>
                             </div>
                         </div>
-                        @endif
+
+
                         <div class="form-group">
                             <label>{{ trans('forms.incidents.message') }}</label>
                             <div class="markdown-control">

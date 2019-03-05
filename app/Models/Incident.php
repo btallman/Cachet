@@ -151,6 +151,11 @@ class Incident extends Model implements HasPresenter
         return $this->getOriginal('scheduled_at') !== null;
     }
 
+    public function getIncidentPresenter()
+    {
+        return new IncidentPresenter($this);
+    }
+
     /**
      * Get the presenter class.
      *

@@ -11,9 +11,9 @@
         </div>
     </li>
 
-    <div class="group-items {{ $componentGroup->is_collapsed ? "hide" : null }}">
+    <div style="margin-left: 25px;" class="group-items {{ $componentGroup->is_collapsed ? "hide" : null }}">
         @foreach($componentGroup->enabled_components()->orderBy('order')->get() as $component)
-        @include('partials.component', compact($component))
+        @include('partials.component', compact($component)) 
         @endforeach
     </div>
     @endif

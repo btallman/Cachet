@@ -192,6 +192,8 @@ class IncidentPresenter extends BasePresenter implements Arrayable
     {
         return array_merge($this->wrappedObject->toArray(), [
             'human_status' => $this->human_status(),
+            'formatted_message' => $this->formattedMessage(),
+            'icon'         => $this->icon(),
             'scheduled_at' => $this->scheduled_at(),
             'created_at'   => $this->created_at(),
             'updated_at'   => $this->updated_at(),
