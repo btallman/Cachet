@@ -10,7 +10,15 @@
 </div>
 
 @include('partials.about-app')
-
+<script>
+    var toggleOutline = function(ctrl) {
+        var itm = $(ctrl).children(":first");
+        console.log(itm);
+        itm.toggleClass('ion-ios-plus-outline');
+        itm.toggleClass('ion-ios-minus-outline');
+    }
+    
+</script>
 @if(!$component_groups->isEmpty() || !$ungrouped_components->isEmpty())
 <div class="section-components">
     @include('partials.components')

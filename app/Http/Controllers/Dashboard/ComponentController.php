@@ -70,7 +70,7 @@ class ComponentController extends Controller
      */
     public function showComponents()
     {
-        $components = Component::orderBy('order')->orderBy('created_at')->get();
+        $components = Component::orderBy('status')->orderBy('name')->orderBy('created_at')->get();
 
         $this->subMenu['components']['active'] = true;
 

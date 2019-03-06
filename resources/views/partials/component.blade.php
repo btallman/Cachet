@@ -1,15 +1,15 @@
-<li class="list-group-item {{ $component->group_id ? "sub-component" : "component" }}">
+<li style="padding:7px" class="list-group-item {{ $component->group_id ? "sub-component" : "component" }}">
     <div class="pull-right">
         <small class="text-component-{{ $component->status }} {{ $component->status_color }}" data-toggle="tooltip" title="{{ trans('cachet.components.last_updated', ['timestamp' => $component->updated_at_formatted]) }}">{{ $component->human_status }}</small>
     </div>
-    <a data-toggle="collapse" href="#component_description_{{ $component->id }}" role="button" aria-expanded="false" aria-controls="collapseExample">
-        {{ $component->name }}
+    <a onclick="toggleOutline(this)" data-toggle="collapse" href="#component_description_{{ $component->id }}" style="text-decoration: none;" role="button" aria-expanded="false" aria-controls="#component_description_{{ $component->id }}">
+        <i class="ion-ios-plus-outline"></i> {{ $component->name }}
     </a>
-    <div style="margin-left: 25px; margin-top: 10px;" class="collapse" id="component_description_{{ $component->id }}">
+    <div style="margin-left: 25px; margin-top: 0px;" class="collapse" id="component_description_{{ $component->id }}">
         <div class="card">
             <div class="card-body">
-                @if($component->description) {!! $component->formattedDescription() !!} @endif
-                  <div class="timeline">
+                @if($component->description) <div style="margin-top:5px;">{!! $component->formattedDescription() !!}</div>@endif
+                  <div style="margin-top: 10px; margin-bottom:10px;" class="timeline">
                         <div class="content-wrapper">
                             @forelse($component->incidents as $incidentID => $incident)
                             @php
@@ -30,7 +30,7 @@
                             @empty
                             <div class="panel panel-message incident">
                                 <div class="panel-body">
-                                    <p>{{ trans('cachet.incidents.none') }}</p>
+                                    <p style="padding: 5px">{{ trans('cachet.incidents.none') }}</p>
                                 </div>
                             </div>
                             @endforelse

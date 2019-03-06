@@ -12,7 +12,7 @@
     </li>
 
     <div style="margin-left: 25px;" class="group-items {{ $componentGroup->is_collapsed ? "hide" : null }}">
-        @foreach($componentGroup->enabled_components()->orderBy('order')->get() as $component)
+        @foreach($componentGroup->enabled_components()->orderBy('status', 'desc')->orderBy('name')->get() as $component)
         @include('partials.component', compact($component)) 
         @endforeach
     </div>

@@ -71,6 +71,9 @@
     @include('partials.banner')
 
     <div class="container">
+        <h1 style="text-align: center;">M Science Internal Status Dashboard</h1>
+        <div class="pull-right"><a href="/dashboard">Dashboard</a></div>
+        <br clear="all" />
         @yield('content')
     </div>
 

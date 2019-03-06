@@ -1,9 +1,9 @@
 <li class="list-group-item {{ $component->group_id ? "sub-component" : "component" }}">
     <form class='component-inline form-vertical' data-messenger="{{trans('dashboard.components.edit.success')}}">
-        <div class="row striped-list-item">
+        <div style="margin-left: 25px;" class="row striped-list-item">
             <div class="col-lg-4 col-md-3 col-sm-12">
                 <h4 class="{{ $component->status_color }}">{{ $component->name }}</h5>
-                @if($component->description) {!! $component->formattedDescription() !!} @endif
+                <div style="margin-left: 25px;">@if($component->description) {!! $component->formattedDescription() !!} @endif</div>
             </div>
             <div class="col-lg-8 col-md-9 col-sm-12 radio-items component-inline-update">
                 @foreach(trans('cachet.components.status') as $statusID => $status)

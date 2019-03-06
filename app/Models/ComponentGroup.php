@@ -119,7 +119,7 @@ class ComponentGroup extends Model implements HasPresenter
      */
     public function enabled_components()
     {
-        return $this->components()->enabled()->orderBy('order');
+        return $this->components()->enabled();
     }
 
     /**
