@@ -32,16 +32,17 @@ class ApiRoutes
         $router->group(['namespace' => 'Api', 'prefix' => 'api/v1', 'middleware' => ['api']], function (Registrar $router) {
             $router->group(['middleware' => ['auth.api']], function (Registrar $router) {
                 $router->get('ping', 'GeneralController@ping');
+
+                $router->get('version', 'GeneralController@version');
+
             });
 
             $router->group(['middleware' => ['auth.api:true']], function (Registrar $router) {
-                $router->get('version', 'GeneralController@version');
+
                 $router->get('status', 'GeneralController@status');
 
-                $router->get('components', 'ComponentController@getComponents');
-                $router->get('components/groups', 'ComponentGroupController@getGroups');
-                $router->get('components/groups/{component_group}', 'ComponentGroupController@getGroup');
-                $router->get('components/{component}', 'ComponentController@getComponent');
+
+                $router->get('subscribers', 'SubscriberController@getSubscribers');
 
                 $router->get('incidents', 'IncidentController@getIncidents');
                 $router->get('incidents/{incident}', 'IncidentController@getIncident');
@@ -50,7 +51,11 @@ class ApiRoutes
                 $router->get('metrics/{metric}', 'MetricController@getMetric');
                 $router->get('metrics/{metric}/points', 'MetricController@getMetricPoints');
 
-                $router->get('subscribers', 'SubscriberController@getSubscribers');
+
+                $router->get('components', 'ComponentController@getComponents');
+                $router->get('components/groups', 'ComponentGroupController@getGroups');
+                $router->get('components/groups/{component_group}', 'ComponentGroupController@getGroup');
+                $router->get('components/{component}', 'ComponentController@getComponent');
 
                 $router->post('components', 'ComponentController@postComponents');
                 $router->post('components/groups', 'ComponentGroupController@postGroups');
