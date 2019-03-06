@@ -32,6 +32,9 @@ class ApiRoutes
         $router->group(['namespace' => 'Api', 'prefix' => 'api/v1', 'middleware' => ['api']], function (Registrar $router) {
             $router->group(['middleware' => ['auth.api']], function (Registrar $router) {
                 $router->get('ping', 'GeneralController@ping');
+            });
+
+            $router->group(['middleware' => ['auth.api:true']], function (Registrar $router) {
                 $router->get('version', 'GeneralController@version');
                 $router->get('status', 'GeneralController@status');
 
@@ -46,9 +49,7 @@ class ApiRoutes
                 $router->get('metrics', 'MetricController@getMetrics');
                 $router->get('metrics/{metric}', 'MetricController@getMetric');
                 $router->get('metrics/{metric}/points', 'MetricController@getMetricPoints');
-            });
 
-            $router->group(['middleware' => ['auth.api:true']], function (Registrar $router) {
                 $router->get('subscribers', 'SubscriberController@getSubscribers');
 
                 $router->post('components', 'ComponentController@postComponents');
