@@ -135,7 +135,9 @@ class ComponentController extends Controller
                 $componentData['link'],
                 $componentData['order'],
                 $componentData['group_id'],
-                $componentData['enabled']
+                $componentData['enabled'],
+                $componentData['schedule'],
+                $componentData['short_desc']
             ));
         } catch (ValidationException $e) {
             return Redirect::route('dashboard.components.edit', ['id' => $component->id])
@@ -188,7 +190,9 @@ class ComponentController extends Controller
                 $componentData['link'],
                 $componentData['order'],
                 $componentData['group_id'],
-                $componentData['enabled']
+                $componentData['enabled'],
+                $componentData['schedule'],
+                $componentData['short_desc']
             ));
         } catch (ValidationException $e) {
             return Redirect::route('dashboard.components.add')

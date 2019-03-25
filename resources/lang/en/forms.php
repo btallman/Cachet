@@ -68,10 +68,13 @@ return [
         'status'      => 'Status',
         'group'       => 'Group',
         'description' => 'Description',
+        'short_desc'  => 'Short Description',
         'link'        => 'Link',
         'tags'        => 'Tags',
+        'last_run'    => 'Last Run At',
         'tags-help'   => 'Comma separated.',
         'enabled'     => 'Component enabled?',
+        'schedule'    => 'Component out of date after pattern',
 
         'groups' => [
             'name'               => 'Name',

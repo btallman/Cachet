@@ -22,6 +22,14 @@
                             <input type="text" class="form-control" name="component[name]" id="component-name" required>
                         </div>
                         <div class="form-group">
+                            <label for="component-short_desc">{{ trans('forms.components.short_desc') }}</label>
+                            <input type="text" class="form-control" name="component[short_desc]" id="component-short_desc" optional>
+                        </div>
+                        <div class="form-group">
+                            <label for="component-schedule">{{ trans('forms.components.schedule') }}</label>
+                            <input type="text" class="form-control" name="component[schedule]" id="component-schedule" optional>
+                        </div>
+                        <div class="form-group">
                             <label for="component-status">{{ trans('forms.components.status') }}</label>
                             <select name="component[status]" class="form-control">
                                 @foreach(trans('cachet.components.status') as $statusID => $status)

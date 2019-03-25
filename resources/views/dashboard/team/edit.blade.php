@@ -29,7 +29,7 @@
                             <input type="password" class="form-control password-strength" name="password" value="" {{ !$current_user->isAdmin ? "disabled": "" }}>
                             <div class="strengthify-wrapper"></div>
                         </div>
-                        @if($current_user->isAdmin)
+                        
                         <div class="form-group">
                             <label>{{ trans('forms.user.user_level') }}</label>
                             <select name="level" class="form-control">
@@ -37,7 +37,7 @@
                                 <option value="1" {{ $user->level === 1 ? "selected" : null }}>{{ trans('forms.user.levels.admin') }}</option>
                             </select>
                         </div>
-                        @endif
+                        
                     </fieldset>
 
                     <div class="form-group">

@@ -68,6 +68,32 @@ class ComponentPresenter extends BasePresenter implements Arrayable
     }
 
     /**
+     * Present formatted date time.
+     *
+     * @return string
+     */
+    public function last_run_formatted()
+    {
+        \Log::info($this->wrappedObject->last_run);
+        
+        if($this->wrappedObject->last_run){
+            return ucfirst(app(DateFactory::class)->make($this->wrappedObject->last_run)->format(Config::get('setting.incident_date_format', 'Y-m-d H:i')));
+        }else{
+            return null;
+        }
+    }
+
+    /**
+     * Formats the last_run time ready to be used by bootstrap-datetimepicker.
+     *
+     * @return string
+     */
+    public function last_run_datetimepicker()
+    {
+        return app(DateFactory::class)->make($this->wrappedObject->last_run)->format('d/m/Y H:i');
+    }
+
+    /**
      * Convert the presenter instance to an array.
      *
      * @return string[]

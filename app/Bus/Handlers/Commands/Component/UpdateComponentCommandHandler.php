@@ -47,11 +47,13 @@ class UpdateComponentCommandHandler
         $params = [
             'name'        => $command->name,
             'description' => $command->description,
+            'short_desc'  => $command->short_desc,
             'link'        => $command->link,
             'status'      => $command->status,
             'enabled'     => $command->enabled,
             'order'       => $command->order,
             'group_id'    => $command->group_id,
+            'schedule'    => $command->schedule,
         ];
 
         return array_filter($params, function ($val) {

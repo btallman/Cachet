@@ -16,10 +16,12 @@ use CachetHQ\Cachet\Models\Traits\SearchableTrait;
 use CachetHQ\Cachet\Models\Traits\SortableTrait;
 use CachetHQ\Cachet\Presenters\ComponentPresenter;
 use CachetHQ\Cachet\Presenters\IncidentPresenter;
+use CachetHQ\Cachet\Presenters\ComponentRunPresenter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use McCool\LaravelAutoPresenter\HasPresenter;
+use Carbon\Carbon;
 
 class Component extends Model implements HasPresenter
 {
@@ -47,6 +49,7 @@ class Component extends Model implements HasPresenter
         'order'       => 'int',
         'group_id'    => 'int',
         'description' => 'string',
+        'short_desc'  => 'string',
         'link'        => 'string',
         'deleted_at'  => 'date',
         'enabled'     => 'bool',
@@ -60,6 +63,8 @@ class Component extends Model implements HasPresenter
     protected $fillable = [
         'name',
         'description',
+        'short_desc',
+        'schedule',
         'status',
         'tags',
         'link',
@@ -77,6 +82,7 @@ class Component extends Model implements HasPresenter
         'name'   => 'required|string',
         'status' => 'int|required',
         'link'   => 'url',
+        'schedule'  => 'int'
     ];
 
     /**
@@ -126,6 +132,26 @@ class Component extends Model implements HasPresenter
     {
         // return Incident::notScheduled()->where('visible', '>=', true)->where('component_id', '=', $this->component_id).get();
         return $this->hasMany(Incident::class, 'component_id', 'id')->without('component_id');
+    }
+
+    /**
+     * Lookup all of the Runs reported on the component.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function runs()
+    {
+        return $this->hasMany(ComponentRun::class, 'component_id', 'id')->sortDesc('created_at');
+    }
+
+    /**
+     * Lookupthe last Run reported on the component.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function last_run()
+    {
+        return $this->hasOne(ComponentRun::class)->whereDate('created_at', "<", Carbon::now())->latest();
     }
 
     /**

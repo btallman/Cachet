@@ -18,8 +18,16 @@
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <fieldset>
                         <div class="form-group">
-                            <label for="incident-name">{{ trans('forms.components.name') }}</label>
+                            <label for="s-name">{{ trans('forms.components.name') }}</label>
                             <input type="text" class="form-control" name="component[name]" id="component-name" required value="{{ $component->name }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="component-short_desc">{{ trans('forms.components.short_desc') }}</label>
+                            <input type="text" class="form-control" name="component[short_desc]" id="component-short_desc"  optional value="{{ $component->short_desc }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="component-schedule">{{ trans('forms.components.schedule') }}</label>
+                            <input type="text" class="form-control" name="component[schedule]" id="component-schedule" optional value="{{ $component->schedule }}">
                         </div>
                         <div class="form-group">
                             <label for="component-status">{{ trans('forms.components.status') }}</label>

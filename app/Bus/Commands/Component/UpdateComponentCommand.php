@@ -30,6 +30,13 @@ final class UpdateComponentCommand
     public $name;
 
     /**
+     * The component short description.
+     *
+     * @var string
+     */
+    public $short_desc;
+    
+    /**
      * The component description.
      *
      * @var string
@@ -70,6 +77,14 @@ final class UpdateComponentCommand
      * @var bool
      */
     public $enabled;
+    
+    /**
+     * Last time the component was run?
+     * 
+     * @var string|null
+     */
+     public $schedule;
+
 
     /**
      * The validation rules.
@@ -84,6 +99,8 @@ final class UpdateComponentCommand
         'order'       => 'int',
         'group_id'    => 'int',
         'enabled'     => 'bool',
+        'schedule'    => 'string|null',
+        'short_desc'  => 'string|null'
     ];
 
     /**
@@ -97,10 +114,12 @@ final class UpdateComponentCommand
      * @param int                               $order
      * @param int                               $group_id
      * @param bool                              $enabled
+     * @param string                            $schedule
+     * @param string                            $short_desc
      *
      * @return void
      */
-    public function __construct(Component $component, $name, $description, $status, $link, $order, $group_id, $enabled)
+    public function __construct(Component $component, $name, $description, $status, $link, $order, $group_id, $enabled, $schedule, $short_desc)
     {
         $this->component = $component;
         $this->name = $name;
@@ -110,5 +129,7 @@ final class UpdateComponentCommand
         $this->order = $order;
         $this->group_id = $group_id;
         $this->enabled = $enabled;
+        $this->schedule = $schedule;
+        $this->short_desc = $short_desc;
     }
 }

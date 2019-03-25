@@ -41,6 +41,17 @@ return [
         ],
     ],
 
+    //ComponentRuns
+    'component_runs'    => [
+        'none'          => "Component Has Not Run",
+        'past'          => 'Past Runs',
+        'na'            => "Component Doesn't have Scheduled Runs",
+        'status'        => [
+            0   => 'Succeeded',
+            1   => 'Failed',
+        ],
+    ],
+    
     // Service Status
     'service' => [
         'good'  => '[0,1] System operational|[2,Inf] All systems are operational',
