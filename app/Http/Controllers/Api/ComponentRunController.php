@@ -108,7 +108,8 @@ class ComponentRunController extends AbstractApiController
                 Binput::get('description'),
                 Binput::get('status'),
                 Binput::get('link'),
-                Binput::get('component_id')
+                Binput::get('component_id'),
+                Binput::get('airflow')
             ));
         } catch (QueryException $e) {
             throw new BadRequestHttpException();
@@ -134,7 +135,8 @@ class ComponentRunController extends AbstractApiController
                 Binput::get('description'),
                 Binput::get('status'),
                 Binput::get('link'),
-                Binput::get('component_id')
+                Binput::get('component_id'),
+                Binput::get('airflow')
             ));
         } catch (QueryException $e) {
             throw new BadRequestHttpException();

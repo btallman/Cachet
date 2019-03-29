@@ -85,7 +85,13 @@ final class UpdateComponentCommand
      */
      public $schedule;
 
-
+    /**
+     * The airflow dag link.
+     *
+     * @var string
+     */
+    public $airflow;
+    
     /**
      * The validation rules.
      *
@@ -100,7 +106,8 @@ final class UpdateComponentCommand
         'group_id'    => 'int',
         'enabled'     => 'bool',
         'schedule'    => 'string|null',
-        'short_desc'  => 'string|null'
+        'short_desc'  => 'string|null',
+        'airflow'     => 'string'
     ];
 
     /**
@@ -116,10 +123,11 @@ final class UpdateComponentCommand
      * @param bool                              $enabled
      * @param string                            $schedule
      * @param string                            $short_desc
+     * @param airflow                           $airflow
      *
      * @return void
      */
-    public function __construct(Component $component, $name, $description, $status, $link, $order, $group_id, $enabled, $schedule, $short_desc)
+    public function __construct(Component $component, $name, $description, $status, $link, $order, $group_id, $enabled, $schedule, $short_desc, $airflow)
     {
         $this->component = $component;
         $this->name = $name;
@@ -131,5 +139,6 @@ final class UpdateComponentCommand
         $this->enabled = $enabled;
         $this->schedule = $schedule;
         $this->short_desc = $short_desc;
+        $this->airflow = $airflow;
     }
 }

@@ -47,7 +47,8 @@ class AddComponentRunCommandHandler
             'description' => $command->description,
             'link'        => $command->link,
             'status'      => $command->status,
-            'component_id'=> $command->component_id
+            'component_id'=> $command->component_id,
+            'airflow'     => $command->airflow
         ];
 
         return array_filter($params, function ($val) {

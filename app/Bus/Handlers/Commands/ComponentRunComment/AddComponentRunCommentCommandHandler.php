@@ -42,15 +42,12 @@ class AddComponentRunCommentCommandHandler
      */
     protected function filter(AddComponentRunCommentCommand $command)
     {
-        \Log::debug($command->comment);
-        \Log::debug($command->type);
-        \Log::debug($command->component_run_id);
-        \Log::debug('User: '.$command->user_id);
         $params = [
             'comment'        => $command->comment,
             'type'           => $command->type,
             'component_run_id' => $command->component_run_id,
-            'user_id'        => $command->user_id
+            'user_id'        => $command->user_id,
+            'airflow'        => $command->airflow
         ];
 
         return array_filter($params, function ($val) {

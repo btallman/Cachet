@@ -49,6 +49,13 @@ final class AddComponentRunCommand
     public $component_id;
 
     /**
+     * The airflow dag link.
+     *
+     * @var string
+     */
+    public $airflow;
+    
+    /**
      * The validation rules.
      *
      * @var string[]
@@ -59,6 +66,7 @@ final class AddComponentRunCommand
         'status'      => 'int|min:0|max:4',
         'link'        => 'url',
         'component_id'    => 'required|int',
+        'airflow'     => 'url'        
     ];
 
     /**
@@ -69,15 +77,17 @@ final class AddComponentRunCommand
      * @param int    $status
      * @param string $link
      * @param int    $component_id
+     * @param string $airflow
      *
      * @return void
      */
-    public function __construct($name, $description, $status, $link, $component_id)
+    public function __construct($name, $description, $status, $link, $component_id, $airflow)
     {
         $this->name = $name;
         $this->description = $description;
         $this->status = (int) $status;
         $this->link = $link;
         $this->component_id = $component_id;
+        $this->airflow = $airflow;
     }
 }

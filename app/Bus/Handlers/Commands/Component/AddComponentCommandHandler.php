@@ -52,6 +52,7 @@ class AddComponentCommandHandler
             'order'       => $command->order,
             'group_id'    => $command->group_id,
             'schedule'    => $command->schedule,
+            'airflow'     => $command->airflow
         ];
 
         return array_filter($params, function ($val) {

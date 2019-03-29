@@ -68,6 +68,7 @@ class Component extends Model implements HasPresenter
         'status',
         'tags',
         'link',
+        'airflow',
         'order',
         'group_id',
         'enabled',
@@ -82,6 +83,7 @@ class Component extends Model implements HasPresenter
         'name'   => 'required|string',
         'status' => 'int|required',
         'link'   => 'url',
+        'airflow'=> 'url',
         'schedule'  => 'int'
     ];
 

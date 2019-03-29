@@ -60,6 +60,10 @@
                             <input type="text" name="component[link]" class="form-control" value="{{ $component->link }}">
                         </div>
                         <div class="form-group">
+                            <label>{{ trans('forms.components.airflow') }}</label>
+                            <input type="text" name="component[airflow]" class="form-control" value="{{ $component->airflow }}">
+                        </div>
+                        <div class="form-group">
                             <label>{{ trans('forms.components.tags') }}</label>
                             <input name="component[tags]" class="form-control" value="{{ $component->tagsList }}">
                             <span class="help-block">{{ trans('forms.components.tags-help') }}</span>

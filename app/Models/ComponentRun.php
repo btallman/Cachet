@@ -37,7 +37,8 @@ class ComponentRun extends Model implements HasPresenter
         'status',
         'description',
         'created_at',
-        'link'
+        'link',
+        'airflow'
     ];
 
     /**
@@ -108,9 +109,7 @@ class ComponentRun extends Model implements HasPresenter
      */
     public function last_comment()
     {   
-        $list = $this->comments()->latest()->first();
-        
-        return $list;
+        return $this->hasOne(ComponentRunComment::class)->latest();
     }
 
 

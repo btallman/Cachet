@@ -70,6 +70,7 @@ return [
         'description' => 'Description',
         'short_desc'  => 'Short Description',
         'link'        => 'Link',
+        'airflow'        => 'Link to DAG',
         'tags'        => 'Tags',
         'last_run'    => 'Last Run At',
         'tags-help'   => 'Comma separated.',
