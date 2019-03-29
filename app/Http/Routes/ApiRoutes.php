@@ -51,11 +51,16 @@ class ApiRoutes
                 $router->get('metrics/{metric}', 'MetricController@getMetric');
                 $router->get('metrics/{metric}/points', 'MetricController@getMetricPoints');
 
-
                 $router->get('components', 'ComponentController@getComponents');
                 $router->get('components/groups', 'ComponentGroupController@getGroups');
                 $router->get('components/groups/{component_group}', 'ComponentGroupController@getGroup');
                 $router->get('components/{component}', 'ComponentController@getComponent');
+                $router->get('components/{component}/runs', 'ComponentController@getComponentRuns');
+                $router->get('components/{component}/last_run', 'ComponentController@getComponentRunsLast');
+
+                $router->get('runs/{component_run}', 'ComponentRunController@getComponentRun');
+                $router->get('runs/{component_run}/comments', 'ComponentRunController@getComponentRunComments');
+                $router->get('runs/{component_run}/last_comment', 'ComponentRunController@getComponendRunCommentLast');
 
                 $router->post('components', 'ComponentController@postComponents');
                 $router->post('components/groups', 'ComponentGroupController@postGroups');
@@ -63,12 +68,15 @@ class ApiRoutes
                 $router->post('metrics', 'MetricController@postMetrics');
                 $router->post('metrics/{metric}/points', 'MetricPointController@postMetricPoints');
                 $router->post('subscribers', 'SubscriberController@postSubscribers');
+                $router->post('runs', 'ComponentRunController@postComponentRun');
+                $router->post('runcomments', 'ComponentRunCommentController@postComponentRunComment');
 
                 $router->put('components/groups/{component_group}', 'ComponentGroupController@putGroup');
                 $router->put('components/{component}', 'ComponentController@putComponent');
                 $router->put('incidents/{incident}', 'IncidentController@putIncident');
                 $router->put('metrics/{metric}', 'MetricController@putMetric');
                 $router->put('metrics/{metric}/points/{metric_point}', 'MetricPointController@putMetricPoint');
+                $router->put('runs/{component_run}', 'ComponentRunController@putComponentRun');
 
                 $router->delete('components/groups/{component_group}', 'ComponentGroupController@deleteGroup');
                 $router->delete('components/{component}', 'ComponentController@deleteComponent');

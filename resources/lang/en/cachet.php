@@ -23,6 +23,14 @@ return [
             'other' => 'Other Components',
         ],
     ],
+    
+    //ComponentRunComments
+    'component_run_comments' =>[
+        'type'          => [
+            0   => 'DAG',
+            
+        ],
+    ],
 
     // Incidents
     'incidents' => [
@@ -47,8 +55,9 @@ return [
         'past'          => 'Past Runs',
         'na'            => "Component Doesn't have Scheduled Runs",
         'status'        => [
-            0   => 'Succeeded',
-            1   => 'Failed',
+            0   => 'Running',
+            1   => 'Succeeded',
+            -1   => 'Failed'
         ],
     ],
     
