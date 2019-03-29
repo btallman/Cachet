@@ -131,7 +131,7 @@ class Component extends Model implements HasPresenter
     public function incidents()
     {
         // return Incident::notScheduled()->where('visible', '>=', true)->where('component_id', '=', $this->component_id).get();
-        return $this->hasMany(Incident::class, 'component_id', 'id')->without('component_id');
+        return $this->hasMany(Incident::class, 'component_id', 'id')->without('component_id')->orderBy('created_at', 'DESC');
     }
 
     /**
