@@ -63,6 +63,39 @@ class ComponentController extends AbstractApiController
     }
 
     /**
+     * Get all component runs for a component.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getComponentRuns(Component $component)
+    {
+        // return $this->item($component);
+        
+        $component_runs = $component->runs();
+
+        if ($sortBy = Binput::get('sort')) {
+            $direction = Binput::has('order') && Binput::get('order') == 'desc';
+
+            $component_runs->sort($sortBy, $direction);
+        }
+
+        $component_runs = $component_runs->paginate(Binput::get('per_page', 20));
+
+        return $this->paginator($component_runs, Request::instance());
+    }
+
+    /**
+     * Get the last component run for a component.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getComponentRunsLast(Component $component)
+    {
+        $last_run = $component->last_run()->get();
+        return $this->item($last_run);
+    }
+    
+    /**
      * Create a new component.
      *
      * @return \Illuminate\Http\JsonResponse

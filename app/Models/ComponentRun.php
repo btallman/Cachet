@@ -15,6 +15,7 @@ use AltThree\Validator\ValidatingTrait;
 use CachetHQ\Cachet\Models\Traits\SearchableTrait;
 use CachetHQ\Cachet\Models\Traits\SortableTrait;
 use CachetHQ\Cachet\Presenters\ComponentRunPresenter;
+use CachetHQ\Cachet\Presenters\ComponentRunCommentPresenter;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -35,7 +36,8 @@ class ComponentRun extends Model implements HasPresenter
         'name',
         'status',
         'description',
-        'created_at'
+        'created_at',
+        'link'
     ];
 
     /**
@@ -46,7 +48,8 @@ class ComponentRun extends Model implements HasPresenter
     public $rules = [
         'component_id' => 'int',
         'name'         => 'required',
-        'status'       => 'required|int'
+        'status'       => 'required|int',
+        'link'         => 'url'
     ];
 
     /**
@@ -61,6 +64,7 @@ class ComponentRun extends Model implements HasPresenter
         'status',
         'description',
         'created_at',
+        'link'
     ];
 
     /**
@@ -74,6 +78,7 @@ class ComponentRun extends Model implements HasPresenter
         'name',
         'status',
         'created_at',
+        'link'
     ];
 
     /**
@@ -85,6 +90,29 @@ class ComponentRun extends Model implements HasPresenter
     {
         return $this->belongsTo(Component::class, 'component_id', 'id');
     }
+
+    /**
+     * Lookup all of the Runs reported on the component.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function comments()
+    {
+        return $this->hasMany(ComponentRunComment::class, 'component_run_id', 'id')->orderBy('created_at', 'DESC');
+    }
+
+    /**
+     * Lookup the last Run reported on the component.
+     *
+     * @return \CachetHQ\Cachet\Models\ComponentRunComment
+     */
+    public function last_comment()
+    {   
+        $list = $this->comments()->latest()->first();
+        
+        return $list;
+    }
+
 
     public function getPresenter()
     {

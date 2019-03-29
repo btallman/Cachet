@@ -141,13 +141,13 @@ class Component extends Model implements HasPresenter
      */
     public function runs()
     {
-        return $this->hasMany(ComponentRun::class, 'component_id', 'id')->sortDesc('created_at');
+        return $this->hasMany(ComponentRun::class, 'component_id', 'id')->orderBy('created_at', 'DESC');
     }
 
     /**
      * Lookupthe last Run reported on the component.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function last_run()
     {
