@@ -12,7 +12,7 @@
 return [
     // Components
     'components' => [
-        'last_updated' => 'Last updated :timestamp',
+        'last_updated' => 'Status Last Updated: :timestamp',
         'status'       => [
             1 => 'Operational',
             2 => 'Performance Issues',
@@ -53,6 +53,7 @@ return [
     'component_runs'    => [
         'none'          => "Component Has Not Run",
         'past'          => 'Past Runs',
+        'last_run'      => 'Pipeline last run: :timestamp',
         'na'            => "Component Doesn't have Scheduled Runs",
         'status'        => [
             0   => 'Running',

@@ -46,8 +46,7 @@ class AddComponentRunCommentCommandHandler
             'comment'        => $command->comment,
             'type'           => $command->type,
             'component_run_id' => $command->component_run_id,
-            'user_id'        => $command->user_id,
-            'airflow'        => $command->airflow
+            'user_id'        => $command->user_id
         ];
 
         return array_filter($params, function ($val) {

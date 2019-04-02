@@ -100,12 +100,14 @@ class ComponentRunPresenter extends BasePresenter implements Arrayable
     public function icon()
     {
         switch ($this->wrappedObject->status) {
-            case 0: // Success
+            case 0: // Running
+                return 'icon ion-flag yellows';
+            case 1: // Success
                 return 'icon ion-checkmark greens';
-            case 1: // Failed
+            case -1: //Failed
                 return 'icon ion-flag oranges';
             default: // Something actually broke, this shouldn't happen, but not a failed run.
-                return 'icon ion-checkmark greens';;
+                return 'icon ion-android-calendar';
         }
     }
 
