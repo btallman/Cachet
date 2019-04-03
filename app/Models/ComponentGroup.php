@@ -48,7 +48,7 @@ class ComponentGroup extends Model implements HasPresenter
      *
      * @var string[]
      */
-    protected $fillable = ['name', 'order', 'collapsed'];
+    protected $fillable = ['name', 'order', 'collapsed', 'supports_runs'];
 
     /**
      * The validation rules.

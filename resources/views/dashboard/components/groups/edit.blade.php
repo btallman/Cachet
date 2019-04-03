@@ -29,6 +29,13 @@
                                 <option value="2" {{ $group->collapsed === 2 ? "selected" : null }}>{{ trans('forms.components.groups.collapsed_incident') }}</option>
                             </select>
                         </div>
+                        <div class="checkbox">
+                            <label>
+                                <!--<input type="hidden" value="0" name="supports_runs">-->
+                                <input type="checkbox" value="1" name="supports_runs"  {{ $group->supports_runs ? "checked" : null }}>
+                                {{ trans('forms.components.supports_runs') }}
+                            </label>
+                        </div>
                     </fieldset>
 
                     <div class="btn-group">

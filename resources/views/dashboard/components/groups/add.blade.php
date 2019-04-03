@@ -29,6 +29,13 @@
                                 <option value="2">{{ trans('forms.components.groups.collapsed_incident') }}</option>
                             </select>
                         </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="hidden" value="0" name="supports_runs">
+                                <input type="checkbox" value="1" name="supports_runs" checked>
+                                {{ trans('forms.components.supports_runs') }}
+                            </label>
+                        </div>
                     </fieldset>
 
                     <div class="btn-group">

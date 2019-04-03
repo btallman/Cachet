@@ -49,6 +49,13 @@ final class UpdateComponentGroupCommand
     public $collapsed;
 
     /**
+     * Does the component group support runs?
+     *
+     * @var bool
+     */
+    public $supports_runs;
+
+    /**
      * The validation rules.
      *
      * @var string[]
@@ -57,6 +64,7 @@ final class UpdateComponentGroupCommand
         'name'      => 'string',
         'order'     => 'int',
         'collapsed' => 'int|between:0,3',
+        'supports_runs'=>'bool',
     ];
 
     /**
@@ -66,14 +74,16 @@ final class UpdateComponentGroupCommand
      * @param string                                 $name
      * @param int                                    $order
      * @param int                                    $collapsed
+     * @param bool                                   $supports_runs
      *
      * @return void
      */
-    public function __construct(ComponentGroup $group, $name, $order, $collapsed)
+    public function __construct(ComponentGroup $group, $name, $order, $collapsed, $supports_runs)
     {
         $this->group = $group;
         $this->name = $name;
         $this->order = (int) $order;
         $this->collapsed = $collapsed;
+        $this->supports_runs = $supports_runs;
     }
 }

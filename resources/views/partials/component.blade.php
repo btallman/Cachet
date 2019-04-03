@@ -15,22 +15,26 @@
             <div class="row">
                 <div class="col" style="margin-top: 5px;">
                     <ul class="nav nav-tabs" id="detail_tabs_{{ $component->id }}" role="tablist">
+                    @if($component->group->supports_runs)
                     <li class="nav-item active">
                         <a class="nav-link" id="runs-tab_{{ $component->id }}" data-toggle="tab" href="#runs_{{ $component->id }}" role="tab" aria-controls="runs" aria-selected="false">Runs</a>    
                     </li>
+                    @endif
                     <li class="nav-item">
-                        <a class="nav-link" id="incidents-tab_{{ $component->id }}" data-toggle="tab" href="#incidents_{{ $component->id }}" role="tab" aria-controls="incidents_{{ $component->id }}" aria-selected="false">Incidents</a>    
+                        <a class="nav-link@if(!$component->group->supports_runs) active@endif" id="incidents-tab_{{ $component->id }}" data-toggle="tab" href="#incidents_{{ $component->id }}" role="tab" aria-controls="incidents_{{ $component->id }}" aria-selected="false">Incidents</a>    
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="description-tab_{{ $component->id }}" data-toggle="tab" href="#description_{{ $component->id }}" role="tab" aria-controls="description" aria-selected="true">Documentation</a>
                     </li>
                 </ul>
                     <div class="tab-content" style="padding:10px;margin:0px;border:1px solid #ccc;height: 250px;overflow:auto;" id="detail_tabs_{{ $component->id }}Content">
+                        @if($component->group->supports_runs)
                         <div class="tab-pane active" id="runs_{{ $component->id }}" role="tabpanel" aria-labelledby="profile-tab_{{ $component->id }}">
                             @include('partials.runs', ['component' => $component])
                         </div>
+                        @endif
 
-                        <div class="tab-pane fade" id="incidents_{{ $component->id }}" role="tabpanel" aria-labelledby="profile-tab_{{ $component->id }}">
+                        <div class="tab-pane @if($component->group->supports_runs) fade @else active @endif" id="incidents_{{ $component->id }}" role="tabpanel" aria-labelledby="profile-tab_{{ $component->id }}">
                             <table class="table">
                                 <thead>
                                     <tr>

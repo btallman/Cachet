@@ -50,7 +50,6 @@ class ComponentRunCommentController extends AbstractApiController
                 \Auth::user()->id
             ));
         } catch (QueryException $e) {
-            \Log::debug($e);
             throw new BadRequestHttpException();
         }
 

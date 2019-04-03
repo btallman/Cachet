@@ -70,7 +70,6 @@
                         </div>
                         <div class="checkbox">
                             <label>
-                                <input type="hidden" value="0" name="component[enabled]">
                                 <input type="checkbox" value="1" name="component[enabled]" checked>
                                 {{ trans('forms.components.enabled') }}
                             </label>

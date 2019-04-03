@@ -74,8 +74,7 @@ class ComponentPresenter extends BasePresenter implements Arrayable
      */
     public function last_run_formatted()
     {
-        \Log::info($this->wrappedObject->last_run);
-        
+
         if($this->wrappedObject->last_run){
             return ucfirst(app(DateFactory::class)->make($this->wrappedObject->last_run)->format(Config::get('setting.incident_date_format', 'Y-m-d H:i')));
         }else{

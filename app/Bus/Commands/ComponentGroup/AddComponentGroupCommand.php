@@ -38,6 +38,14 @@ final class AddComponentGroupCommand
      * @var int
      */
     public $collapsed;
+    
+    /**
+     * Does the component group support runs?
+     *
+     * @var bool
+     */
+    public $supports_runs;
+    
 
     /**
      * The validation rules.
@@ -48,6 +56,7 @@ final class AddComponentGroupCommand
         'name'      => 'required|string',
         'order'     => 'int',
         'collapsed' => 'int|between:0,3',
+        'supports_runs'=> 'bool',
     ];
 
     /**
@@ -59,10 +68,11 @@ final class AddComponentGroupCommand
      *
      * @return void
      */
-    public function __construct($name, $order, $collapsed)
+    public function __construct($name, $order, $collapsed, $supports_runs)
     {
         $this->name = $name;
         $this->order = (int) $order;
         $this->collapsed = $collapsed;
+        $this->supports_runs = $supports_runs;
     }
 }

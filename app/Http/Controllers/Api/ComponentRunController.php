@@ -128,7 +128,6 @@ class ComponentRunController extends AbstractApiController
     public function putComponentRun(ComponentRun $component_run)
     {
         try {
-            \Log::debug('Binput: name: '.Binput::get('name'));
             dispatch(new UpdateComponentRunCommand(
                 $component_run,
                 Binput::get('name'),

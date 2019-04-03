@@ -46,6 +46,7 @@ class UpdateComponentGroupCommandHandler
             'name'      => $command->name,
             'order'     => $command->order,
             'collapsed' => $command->collapsed,
+            'supports_runs'=>$command->supports_runs,
         ];
 
         return array_filter($params, function ($val) {

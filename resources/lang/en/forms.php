@@ -75,6 +75,7 @@ return [
         'last_run'    => 'Last Run At',
         'tags-help'   => 'Comma separated.',
         'enabled'     => 'Component enabled?',
+        'supports_runs'=>'Group components support runs?',
         'schedule'    => 'Component out of date after pattern',
 
         'groups' => [
