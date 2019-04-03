@@ -13,105 +13,21 @@
     <div style="margin-left: 25px; margin-top: 0px;" class="collapse" id="component_description_{{ $component->id }}">
         <div class="container" style="width:862px;">
             <div class="row">
-                <div class="col">
+                <div class="col" style="margin-top: 5px;">
                     <ul class="nav nav-tabs" id="detail_tabs_{{ $component->id }}" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link active" id="description-tab_{{ $component->id }}" data-toggle="tab" href="#description_{{ $component->id }}" role="tab" aria-controls="description" aria-selected="true">Description</a>
-                    </li>
-                    <li class="nav-item">
+                    <li class="nav-item active">
                         <a class="nav-link" id="runs-tab_{{ $component->id }}" data-toggle="tab" href="#runs_{{ $component->id }}" role="tab" aria-controls="runs" aria-selected="false">Runs</a>    
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="incidents-tab_{{ $component->id }}" data-toggle="tab" href="#incidents_{{ $component->id }}" role="tab" aria-controls="incidents_{{ $component->id }}" aria-selected="false">Incidents</a>    
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="description-tab_{{ $component->id }}" data-toggle="tab" href="#description_{{ $component->id }}" role="tab" aria-controls="description" aria-selected="true">Documentation</a>
+                    </li>
                 </ul>
-                    <div class="tab-content" style="margin:5px;border:1px;" id="detail_tabs_{{ $component->id }}Content">
-                        <div class="tab-pane active" id="description_{{ $component->id }}" role="tabpanel" aria-labelledby="description-tab_{{ $component->id }}">
-                            @if($component->description)
-                                {!! $component->formattedDescription() !!}
-                            @else
-                                {{  $component->short_desc }}
-                            @endif
-                            
-                            <ul id="component-detail-links_{{ $component->id }}" class="nav nav-pills">
-                            @if($current_user->isAdmin)
-                                <li class="nav-item"><a href="/dashboard/components/{{ $component->id }}/edit" class="btn btn-linkt">{{ trans('forms.edit') }} Component</a></li>
-                            @endif
-                            @if($component->link)
-                                <li class="nav-item"><a href="{{ $component->link }}" target="_blank" class="btn btn-link">Confluence Docs</a></li>
-                            @else
-                                <li class="nav-item">No Docs</li>
-                            @endif
-                            @if($component->airflow)
-                                <li class="nav-item"><a href="{{ $component->airflow }}" target="_blank" class="btn btn-link">Airflow DAG</a></li>
-                            @endif
-                            </ul>
-                        </div>
-                      
-                        <div class="tab-pane fade" id="runs_{{ $component->id }}" role="tabpanel" aria-labelledby="profile-tab_{{ $component->id }}">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Status</th>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Description</th>
-                                        <th scope="col">Run At</th>
-                                        <th scope="col">Updates</th>
-                                        <th scope="col">Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                @forelse($component->runs as $runID => $run)
-                                @php
-                                    $run = $run->getPresenter();
-                                    $comments = $run->comments;
-                                    $last_comment = $run->last_comment;
-                                    if($last_comment){
-                                        $last_comment = $last_comment->getPresenter();
-                                        $comment_popup = "";
-                                        foreach($comments as $comment) {
-                                            $comment = $comment->getPresenter();
-                                            $comment_popup .= '<div align="left">'.$comment->created_at_formatted." - ".$comment->comment . "</p>";
-                                        }
-                                    }else{
-                                        $comment_popup = "NO WAY MAN!";
-                                    }
-                                @endphp
-                                    <tr>
-                                        <td scope="row">
-                                            <div class="status-icon status-{{ $run->status }}" data-toggle="tooltip" title="{{ $run->human_status }}" data-placement="left">
-                                                <i class="{{ $run->icon }}"></i>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            {{ $run->name }}
-                                        </td>
-                                        <td>
-                                            {{ $run->description }}
-                                        </td>
-                                        <td>
-                                            <span data-toggle="tooltip" title="{{ $run->created_at_diff }}">{{ $run->created_at }}</span>
-                                        </td>
-                                        <td>
-                                            @if($last_comment)
-                                                <span data-toggle="tooltip" data-html="true" title="{{ $comment_popup }}">{!! $last_comment->formattedComment !!}</span>
-                                            @else
-                                                <span>No Comments</span>
-                                            @endif
-                                        </td>
-                                        <td>
-                                            <a href="{{ $run->airflow }}" target="_blank">Airflow</a>
-                                        </td>
-                                    </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="4">
-                                            <p style="padding: 5px">{{ trans('cachet.incidents.none') }}</p>
-                                        </td>
-                                    </tr>
-                                @endforelse
-                                </tbody>
-                            </table>
+                    <div class="tab-content" style="padding:10px;margin:0px;border:1px solid #ccc;height: 250px;overflow:auto;" id="detail_tabs_{{ $component->id }}Content">
+                        <div class="tab-pane active" id="runs_{{ $component->id }}" role="tabpanel" aria-labelledby="profile-tab_{{ $component->id }}">
+                            @include('partials.runs', ['component' => $component])
                         </div>
 
                         <div class="tab-pane fade" id="incidents_{{ $component->id }}" role="tabpanel" aria-labelledby="profile-tab_{{ $component->id }}">
@@ -147,7 +63,28 @@
                                 </tbody>
                             </table>
                         </div>
+
+                        <div class="tab-pane fade" id="description_{{ $component->id }}" role="tabpanel" aria-labelledby="description-tab_{{ $component->id }}">
+                            @include('partials.documentation', ['component' => $component])
+                        </div>
+
                     </div>
+                    
+                     <ul id="component-detail-links_{{ $component->id }}" class="nav nav-pills">
+                        @if($current_user->isAdmin)
+                            <li class="nav-item"><a href="/dashboard/components/{{ $component->id }}/edit" class="btn btn-linkt">{{ trans('forms.edit') }} Component</a></li>
+                        @endif
+                        @if($component->link)
+                            <li class="nav-item"><a href="{{ $component->link }}" target="_blank" class="btn btn-link">Confluence Docs</a></li>
+                        @else
+                            <li class="nav-item">No Docs</li>
+                        @endif
+                        @if($component->airflow)
+                            <li class="nav-item"><a href="{{ $component->airflow }}" target="_blank" class="btn btn-link">Airflow DAG</a></li>
+                        @else
+                            <li class="nav-item"><a href="Javascript: alert('No DAG configured');">No DAG</a></li>
+                        @endif
+                    </ul>
                 </div>
             </div>
         </div>
