@@ -18,15 +18,15 @@
                     <fieldset>
                         <div class="form-group">
                             <label>{{ trans('forms.user.username') }}</label>
-                            <input type="text" class="form-control" name="username" value="{{ $user->username }}" required>
+                            <input type="text" class="form-control" name="updated_username" value="{{ $user->username }}" required>
                         </div>
                         <div class="form-group">
                             <label>{{ trans('forms.user.email') }}</label>
-                            <input type="email" class="form-control" name="email" value="{{ $user->email }}" required>
+                            <input type="email" class="form-control" name="updated_email" value="{{ $user->email }}" required>
                         </div>
                         <div class="form-group">
                             <label>{{ trans('forms.user.password') }}</label>
-                            <input type="password" class="form-control password-strength" name="password" value="" {{ !$current_user->isAdmin ? "disabled": "" }}>
+                            <input autocomplete="off" type="password" class="form-control password-strength" name="updated_password" value="" {{ !$current_user->isAdmin ? "disabled": "" }}>
                             <div class="strengthify-wrapper"></div>
                         </div>
                         

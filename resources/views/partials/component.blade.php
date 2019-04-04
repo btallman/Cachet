@@ -1,14 +1,17 @@
+@php
+    if($component->last_run){
+        $last_run = $component->last_run->getPresenter();
+    } else {
+        $last_run = false;
+    }
+@endphp
 <li style="padding:7px" class="list-group-item {{ $component->group_id ? "sub-component" : "component" }}">
-    <div class="pull-right">
-        <small class="text-component-{{ $component->status }} {{ $component->status_color }}" data-toggle="tooltip" title="{{ trans('cachet.components.last_updated', ['timestamp' => $component->updated_at_formatted]) }}">{{ $component->human_status }}</small>
+    <div class="pull-right" style="width:200px;">
+        <div class="pull-right"><small class="text-component-{{ $component->status }} {{ $component->status_color }}" data-toggle="tooltip" title="{{ trans('cachet.components.last_updated', ['timestamp' => $component->updated_at_formatted]) }}">{{ $component->human_status }}</small></div>
+        @if($last_run)<div class="pull-left" data-toggle="tooltip" title="{{ trans('cachet.component_runs.last_run', ['timestamp' => $last_run->created_at_formatted]) }}">{{ $last_run->created_at_diff }}</div>@endif
     </div>
     <a onclick="toggleOutline(this)" data-toggle="collapse" href="#component_description_{{ $component->id }}" style="text-decoration: none;" role="button" aria-expanded="false" aria-controls="#component_description_{{ $component->id }}">
         <i class="ion-ios-plus-outline"></i> {{ $component->name }}@if( $component->short_desc) - {{ $component->short_desc }}@endif
-        @if($component->last_run)
-         @php
-            $last_run = $component->last_run->getPresenter();
-        @endphp
-        <span class="pull-right" data-toggle="tooltip" title="{{ trans('cachet.component_runs.last_run', ['timestamp' => $last_run->created_at_formatted]) }}">{{ $last_run->created_at_diff }}&nbsp;</span>@endif
     </a>
     <div style="margin-left: 25px; margin-top: 0px;" class="collapse" id="component_description_{{ $component->id }}">
         <div class="container" style="width:862px;">

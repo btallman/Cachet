@@ -107,7 +107,15 @@ class TeamController extends Controller
      */
     public function postUpdateUser(User $user)
     {
-        $userData = array_filter(Binput::only(['username', 'email', 'password', 'level']));
+        // $userData = array_filter(Binput::only(['username', 'email', 'password', 'level']));
+        $userData = [];
+        foreach(['username', 'email', 'password'] as $field){
+            $userData[$field] = Binput::get('updated_'.$field);
+        }
+        $userData['level'] = Binput::get('level');
+        if(is_null($userData['password']) || $userData['password'] == ""){
+            unset($userData['password']);
+        }
 
         try {
             $user->update($userData);

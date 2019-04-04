@@ -5,9 +5,8 @@
     <li class="list-group-item group-name">
         <i class="{{ $componentGroup->collapse_class }} group-toggle"></i>
         <strong>{{ $componentGroup->name }}</strong>
-
-        <div class="pull-right">
-            @if($componentGroup->has_last_run) Last Run<span>{{ $componentGroup->has_last_run }}</span>@endif<i class="ion ion-ios-circle-filled text-component-{{ $componentGroup->lowest_status }} {{ $componentGroup->lowest_status_color }}" data-toggle="tooltip" title="{{ $componentGroup->lowest_human_status }}"></i>
+        <div class="pull-right" style="width:200px;">
+            <div class="pull-left">@if($componentGroup->supports_runs)&nbsp;&nbsp;Last Run @endif</div><div class="pull-right"><i class="ion ion-ios-circle-filled text-component-{{ $componentGroup->lowest_status }} {{ $componentGroup->lowest_status_color }}" data-toggle="tooltip" title="{{ $componentGroup->lowest_human_status }}"></i></div>
         </div>
     </li>
 

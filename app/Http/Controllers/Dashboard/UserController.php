@@ -40,8 +40,13 @@ class UserController extends Controller
      */
     public function postUser()
     {
-        $userData = array_filter(Binput::only(['username', 'email', 'password', 'google2fa']));
-
+        // $userData = array_filter(Binput::only(, 'google2fa']));
+        $userData = [];
+        foreach(['username', 'email', 'password'] as $field){
+            $userData[$field] = Binput::get('updated_'.$field);
+        }
+        $userData['google2fa'] = Binput::get('google2fa');
+        \Log::debug($userData);
         $enable2FA = (bool) array_pull($userData, 'google2fa');
 
         // Let's enable/disable auth
@@ -49,6 +54,10 @@ class UserController extends Controller
             $userData['google_2fa_secret'] = Google2FA::generateSecretKey();
         } elseif (!$enable2FA) {
             $userData['google_2fa_secret'] = '';
+        }
+
+        if(is_null($userData['password']) || $userData['password'] == ""){
+            unset($userData['password']);
         }
 
         try {
